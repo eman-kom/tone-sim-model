@@ -1,0 +1,14 @@
+{
+	"log_dir": "/home/e/eXXXXXXX/CCC/logs",
+	"mp3_folder": "/home/e/eXXXXXXX/tone_perfect_all_mp3/tone_perfect",
+	"saved_models_folder": "/home/e/eXXXXXXX/CCC/saved_models",
+	"transfer_model": "/home/e/eXXXXXXX/CCC/saved_models/MULTITASK_model_25.pth",
+	"inference_weights": "/home/e/eXXXXXXX/CCC/saved_models/best_siamese_model.pth",
+	"device": "cpu",
+	"train_split": 0.7,
+	"val_split": 0.2,
+	"batch_size": 32,
+	"epochs": 15,
+	"learning_rate": 0.001,
+	"sampling_rate": 44100
+}

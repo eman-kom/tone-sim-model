@@ -1,0 +1,6 @@
+librosa
+torchaudio
+tensorboard
+torch
+numpy
+pandas
