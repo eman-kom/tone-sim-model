@@ -1,6 +1,18 @@
-# tone-sim-model
+# Tone Sim Model
+Predicts the pinyin and tone of a student and calculates its similarity with a reference audio.
 
-# Inference:
-Call from inside this repo:
+## Training
+To create the csv files:
+`python initialise_dataset.py` 
 
-`python -W ignore .\inference.py -f1 "./examples/a1_FV1_MP3.mp3" -f2 "./examples/zuo4_MV1_MP3.mp3"`
+To train the feature extractor:
+`python train_classify.py`
+
+ To train the siamese model:
+`python train_siamese.py`
+
+ To read training logs:
+`tensorboard --logdir=runs`
+
+## Inference
+`python -W ignore inference.py -r "./examples/ao1_MV1_MP3.mp3" -i "./examples/tan2_FV1_MP3.mp3"`

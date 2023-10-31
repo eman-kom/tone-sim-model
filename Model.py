@@ -54,24 +54,22 @@ class ClassificationModel(nn.Module):
 class SiameseModel(nn.Module):
     def __init__(self, pth_file, n_tones, n_pinyins, device):
         super().__init__()
-        weights = torch.load(pth_file, map_location=device)["model_state_dict"]
-        self.model = ClassificationModel(n_tones, n_pinyins)
-        self.model.load_state_dict(weights)
+        self.pretrained = ClassificationModel(n_tones, n_pinyins)
+        weights = torch.load(pth_file, map_location=device)
+        self.pretrained.load_state_dict(weights)
 
-        for param in self.model.parameters():
+        for param in self.pretrained.parameters():
             param.requires_grad = False
 
-        self.feature_extractor = self.model.feature_extractor
-
         self.siam = nn.Sequential(
-            self.feature_extractor,
+            self.pretrained.feature_extractor,
             nn.AdaptiveAvgPool2d(1),
             nn.Flatten(start_dim=1),
             nn.Linear(512, 1024)
         )
 
     def forward(self, x1, x2):
-        preds = self.model(x1)
+        preds = self.pretrained(x1)
         x1 = self.siam(x1)
         x2 = self.siam(x2)
 
