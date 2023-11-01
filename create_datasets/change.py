@@ -46,7 +46,7 @@ class CreateChangeDataset:
                 pinyin_changed = self.__extract_pinyin_tone(changed)
 
                 if pinyin_truth != pinyin_changed:
-                    mismatches.append([ground_truth, changed, 0])
+                    mismatches.append([ground_truth, changed, -1])
                     break
 
         return mismatches

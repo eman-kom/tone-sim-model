@@ -25,18 +25,17 @@ class TrainSiamese:
         self.model = SiameseModel(pretrained_model, n_tones, n_pinyins, self.device).to(self.device)
         self.optimizer = optim.Adam(self.model.parameters(), lr=config["learning_rate"])
         self.scheduler = optim.lr_scheduler.StepLR(self.optimizer, 1, gamma=0.9)
-        self.pdist = nn.PairwiseDistance(p=2)
+
+        self.dist = nn.CosineSimilarity()
+        self.loss_fn = nn.CosineEmbeddingLoss()
 
 
     def __contrastive_loss(self, embeddings, ref_embeddings, similarity, margin=1.0):
-        dist = self.__calc_dist(embeddings, ref_embeddings)
-        loss = similarity * torch.pow(dist, 2) + (1 - similarity) * torch.pow(torch.clamp(margin - dist, min=0.0), 2)
-        return torch.mean(loss)
+        return self.loss_fn(embeddings, ref_embeddings, similarity)
 
 
     def __calc_dist(self, embeddings, ref_embeddings):
-        distances = self.pdist(embeddings, ref_embeddings)
-        return distances
+        return self.dist(embeddings, ref_embeddings)
 
 
     def __runner(self, dataset, isTrain=True):
@@ -59,7 +58,8 @@ class TrainSiamese:
             epoch_loss += loss.item()
             y_true_similarity.extend(similarity)
             preds_sims = self.__calc_dist(pred_embeds, ref_embeds).detach().cpu().numpy()
-            preds_sims = 1 - np.trunc(preds_sims)
+            preds_sims[preds_sims > 0.5] = 1
+            preds_sims[preds_sims < 0.5] = -1
             y_pred_similarity.extend(preds_sims.tolist())
 
         epoch_loss = epoch_loss / len(dataset)

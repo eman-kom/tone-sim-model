@@ -7,9 +7,8 @@ import argparse
 def find_dist(ref_embeds, embeds):
     embeds = embeds.squeeze()
     ref_embeds = ref_embeds.squeeze()
-    pdist = nn.PairwiseDistance(p=2)
-    dist = 1 - pdist(embeds, ref_embeds).item()
-    return dist
+    cos = nn.CosineSimilarity(dim=0)
+    return cos(embeds, ref_embeds)
 
 
 def decode_one_hot(preds, mappings):
