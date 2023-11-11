@@ -3,7 +3,7 @@ from Model import SiameseModel
 from torch import nn, optim
 from torch.utils.tensorboard import SummaryWriter
 from tqdm import tqdm
-from utils import read_json, calculate_accuracy
+from utils import read_json, calculate_accuracy, dist_filename
 import argparse
 import json
 import torch
@@ -16,7 +16,7 @@ class TrainSiamese:
         self.threshold = 0.5
         self.device = config["device"]
         self.epochs = config["epochs"]
-        self.name = config["siamese_model_name"]
+        self.name = dist_filename(config["siamese_model_name"], args.euclid)
         self.models_folder = config['models_folder']
 
         n_tones = len(read_json(f"{config['csv_folder']}/tones.json"))
@@ -105,6 +105,7 @@ class TrainSiamese:
 
             self.scheduler.step()
             writer.add_scalar("Loss/train", train_loss, epoch)
+            writer.add_scalar("Loss/validation", val_loss, epoch)
             writer.add_scalar("Similarity_Acc/train", train_acc, epoch)
             writer.add_scalar("Similarity_Acc/validation", val_acc, epoch)
 

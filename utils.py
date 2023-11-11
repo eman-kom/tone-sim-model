@@ -50,3 +50,9 @@ def calculate_accuracy(list1, list2, accuracy=0):
         accuracy += a == b
 
     return accuracy / len(list1)
+
+def dist_filename(filename, isEuclid):
+    if isEuclid:
+        return "euclid-" + filename
+    else:
+        return "cosine-" + filename

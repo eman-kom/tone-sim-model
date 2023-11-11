@@ -1,4 +1,4 @@
-from utils import read_json, process_mp3
+from utils import read_json, process_mp3, dist_filename
 from Model import SiameseModel
 from torch import nn
 import torch
@@ -36,7 +36,8 @@ if __name__ == "__main__":
     pinyins_dict = swap_key_values(read_json(f"{config['csv_folder']}/pinyins.json"))
     tones_dict = swap_key_values(read_json(f"{config['csv_folder']}/tones.json"))
 
-    siamese_model = f"{config['models_folder']}/{config['siamese_model_name']}"
+    model_name = dist_filename(config['siamese_model_name'], args.euclid)
+    siamese_model = f"{config['models_folder']}/{model_name}"
     pretrained_model = f"{config['models_folder']}/{config['pretrained_model_name']}"
 
     model = SiameseModel(pretrained_model, len(tones_dict), len(pinyins_dict), config["device"])
@@ -47,7 +48,10 @@ if __name__ == "__main__":
     with torch.no_grad():
         pred_embeds, ref_embeds, pinyin_tone = model(user_mp3, ref_mp3)
 
-    dist = find_dist(pred_embeds, ref_embeds)
+    dist = find_dist(pred_embeds, ref_embeds).item()
+    
+    if args.euclid:
+        dist = 1 - dist
     
     pinyin_preds, tone_preds = pinyin_tone
     tone = decode_one_hot(tone_preds, tones_dict)

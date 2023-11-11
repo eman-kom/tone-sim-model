@@ -1,5 +1,3 @@
-/home/e/e0544394/env2/lib/python3.10/site-packages/torch/_utils.py:831: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
-  return self.fget.__get__(instance, owner)()
 Refer: a1_FV1_MP3.mp3
 Input: a1_FV1_MP3.mp3
 Pinyin Prediction: a
@@ -10,31 +8,31 @@ Refer: a1_FV1_MP3.mp3
 Input: a1_MV3_MP3.mp3
 Pinyin Prediction: a
 Tone Prediction  : 1
-Similarity Score (Euclid): 0.602
+Similarity Score (Euclid): 0.4929
 ***
 Refer: a1_FV1_MP3.mp3
 Input: a4_FV1_MP3.mp3
 Pinyin Prediction: a
 Tone Prediction  : 4
-Similarity Score (Euclid): 0.1737
+Similarity Score (Euclid): 0.2329
 ***
 Refer: a1_FV1_MP3.mp3
 Input: zuo4_FV1_MP3.mp3
 Pinyin Prediction: zuo
 Tone Prediction  : 4
-Similarity Score (Euclid): -0.5362
+Similarity Score (Euclid): -0.3115
 ***
 Refer: a1_FV1_MP3.mp3
 Input: zuo4_MV2_MP3.mp3
 Pinyin Prediction: zuo
 Tone Prediction  : 4
-Similarity Score (Euclid): -0.3591
+Similarity Score (Euclid): -0.2882
 ***
 Refer: a1_MV3_MP3.mp3
 Input: a1_FV1_MP3.mp3
 Pinyin Prediction: a
 Tone Prediction  : 1
-Similarity Score (Euclid): 0.602
+Similarity Score (Euclid): 0.4929
 ***
 Refer: a1_MV3_MP3.mp3
 Input: a1_MV3_MP3.mp3
@@ -46,31 +44,31 @@ Refer: a1_MV3_MP3.mp3
 Input: a4_FV1_MP3.mp3
 Pinyin Prediction: a
 Tone Prediction  : 4
-Similarity Score (Euclid): 0.277
+Similarity Score (Euclid): 0.3377
 ***
 Refer: a1_MV3_MP3.mp3
 Input: zuo4_FV1_MP3.mp3
 Pinyin Prediction: zuo
 Tone Prediction  : 4
-Similarity Score (Euclid): -0.6515
+Similarity Score (Euclid): -0.156
 ***
 Refer: a1_MV3_MP3.mp3
 Input: zuo4_MV2_MP3.mp3
 Pinyin Prediction: zuo
 Tone Prediction  : 4
-Similarity Score (Euclid): -0.4641
+Similarity Score (Euclid): -0.023
 ***
 Refer: a4_FV1_MP3.mp3
 Input: a1_FV1_MP3.mp3
 Pinyin Prediction: a
 Tone Prediction  : 1
-Similarity Score (Euclid): 0.1737
+Similarity Score (Euclid): 0.2329
 ***
 Refer: a4_FV1_MP3.mp3
 Input: a1_MV3_MP3.mp3
 Pinyin Prediction: a
 Tone Prediction  : 1
-Similarity Score (Euclid): 0.277
+Similarity Score (Euclid): 0.3377
 ***
 Refer: a4_FV1_MP3.mp3
 Input: a4_FV1_MP3.mp3
@@ -82,31 +80,31 @@ Refer: a4_FV1_MP3.mp3
 Input: zuo4_FV1_MP3.mp3
 Pinyin Prediction: zuo
 Tone Prediction  : 4
-Similarity Score (Euclid): -0.3312
+Similarity Score (Euclid): -0.0417
 ***
 Refer: a4_FV1_MP3.mp3
 Input: zuo4_MV2_MP3.mp3
 Pinyin Prediction: zuo
 Tone Prediction  : 4
-Similarity Score (Euclid): -0.1416
+Similarity Score (Euclid): 0.088
 ***
 Refer: zuo4_FV1_MP3.mp3
 Input: a1_FV1_MP3.mp3
 Pinyin Prediction: a
 Tone Prediction  : 1
-Similarity Score (Euclid): -0.5362
+Similarity Score (Euclid): -0.3115
 ***
 Refer: zuo4_FV1_MP3.mp3
 Input: a1_MV3_MP3.mp3
 Pinyin Prediction: a
 Tone Prediction  : 1
-Similarity Score (Euclid): -0.6515
+Similarity Score (Euclid): -0.156
 ***
 Refer: zuo4_FV1_MP3.mp3
 Input: a4_FV1_MP3.mp3
 Pinyin Prediction: a
 Tone Prediction  : 4
-Similarity Score (Euclid): -0.3312
+Similarity Score (Euclid): -0.0417
 ***
 Refer: zuo4_FV1_MP3.mp3
 Input: zuo4_FV1_MP3.mp3
@@ -118,31 +116,31 @@ Refer: zuo4_FV1_MP3.mp3
 Input: zuo4_MV2_MP3.mp3
 Pinyin Prediction: zuo
 Tone Prediction  : 4
-Similarity Score (Euclid): 0.4417
+Similarity Score (Euclid): 0.4486
 ***
 Refer: zuo4_MV2_MP3.mp3
 Input: a1_FV1_MP3.mp3
 Pinyin Prediction: a
 Tone Prediction  : 1
-Similarity Score (Euclid): -0.3591
+Similarity Score (Euclid): -0.2882
 ***
 Refer: zuo4_MV2_MP3.mp3
 Input: a1_MV3_MP3.mp3
 Pinyin Prediction: a
 Tone Prediction  : 1
-Similarity Score (Euclid): -0.4641
+Similarity Score (Euclid): -0.023
 ***
 Refer: zuo4_MV2_MP3.mp3
 Input: a4_FV1_MP3.mp3
 Pinyin Prediction: a
 Tone Prediction  : 4
-Similarity Score (Euclid): -0.1416
+Similarity Score (Euclid): 0.088
 ***
 Refer: zuo4_MV2_MP3.mp3
 Input: zuo4_FV1_MP3.mp3
 Pinyin Prediction: zuo
 Tone Prediction  : 4
-Similarity Score (Euclid): 0.4418
+Similarity Score (Euclid): 0.4486
 ***
 Refer: zuo4_MV2_MP3.mp3
 Input: zuo4_MV2_MP3.mp3

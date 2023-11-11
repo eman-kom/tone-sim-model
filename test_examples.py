@@ -1,4 +1,4 @@
-from utils import read_json, process_mp3
+from utils import read_json, process_mp3, dist_filename
 from Model import SiameseModel
 from torch import nn
 import torch
@@ -33,7 +33,8 @@ if __name__ == "__main__":
 
     # load models
     sim_func = nn.PairwiseDistance(p=2) if args.euclid else nn.CosineSimilarity(dim=0)
-    siamese_model = f"{config['models_folder']}/{config['siamese_model_name']}"
+    model_name = dist_filename(config['siamese_model_name'], args.euclid)
+    siamese_model = f"{config['models_folder']}/{model_name}"
     pretrained_model = f"{config['models_folder']}/{config['pretrained_model_name']}"
     model = SiameseModel(pretrained_model, len(tones_dict), len(pinyins_dict), config["device"])
     weights = torch.load(siamese_model, map_location=config["device"], weights_only=True)
