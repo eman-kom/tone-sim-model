@@ -11,6 +11,7 @@ To train the feature extractor:
 
 `python train_classify.py`
 
+---
 
 To train the siamese model:
 
