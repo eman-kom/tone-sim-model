@@ -50,3 +50,7 @@ def calculate_accuracy(list1, list2, accuracy=0):
         accuracy += a == b
 
     return accuracy / len(list1)
+
+def calc_dist(isCosine):
+    if isCosine:
+        return 

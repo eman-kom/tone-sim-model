@@ -1,0 +1,152 @@
+/home/e/e0544394/env2/lib/python3.10/site-packages/torch/_utils.py:831: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  return self.fget.__get__(instance, owner)()
+Refer: a1_FV1_MP3.mp3
+Input: a1_FV1_MP3.mp3
+Pinyin Prediction: a
+Tone Prediction  : 1
+Similarity Score (Euclid): 1.0
+***
+Refer: a1_FV1_MP3.mp3
+Input: a1_MV3_MP3.mp3
+Pinyin Prediction: a
+Tone Prediction  : 1
+Similarity Score (Euclid): 0.602
+***
+Refer: a1_FV1_MP3.mp3
+Input: a4_FV1_MP3.mp3
+Pinyin Prediction: a
+Tone Prediction  : 4
+Similarity Score (Euclid): 0.1737
+***
+Refer: a1_FV1_MP3.mp3
+Input: zuo4_FV1_MP3.mp3
+Pinyin Prediction: zuo
+Tone Prediction  : 4
+Similarity Score (Euclid): -0.5362
+***
+Refer: a1_FV1_MP3.mp3
+Input: zuo4_MV2_MP3.mp3
+Pinyin Prediction: zuo
+Tone Prediction  : 4
+Similarity Score (Euclid): -0.3591
+***
+Refer: a1_MV3_MP3.mp3
+Input: a1_FV1_MP3.mp3
+Pinyin Prediction: a
+Tone Prediction  : 1
+Similarity Score (Euclid): 0.602
+***
+Refer: a1_MV3_MP3.mp3
+Input: a1_MV3_MP3.mp3
+Pinyin Prediction: a
+Tone Prediction  : 1
+Similarity Score (Euclid): 1.0
+***
+Refer: a1_MV3_MP3.mp3
+Input: a4_FV1_MP3.mp3
+Pinyin Prediction: a
+Tone Prediction  : 4
+Similarity Score (Euclid): 0.277
+***
+Refer: a1_MV3_MP3.mp3
+Input: zuo4_FV1_MP3.mp3
+Pinyin Prediction: zuo
+Tone Prediction  : 4
+Similarity Score (Euclid): -0.6515
+***
+Refer: a1_MV3_MP3.mp3
+Input: zuo4_MV2_MP3.mp3
+Pinyin Prediction: zuo
+Tone Prediction  : 4
+Similarity Score (Euclid): -0.4641
+***
+Refer: a4_FV1_MP3.mp3
+Input: a1_FV1_MP3.mp3
+Pinyin Prediction: a
+Tone Prediction  : 1
+Similarity Score (Euclid): 0.1737
+***
+Refer: a4_FV1_MP3.mp3
+Input: a1_MV3_MP3.mp3
+Pinyin Prediction: a
+Tone Prediction  : 1
+Similarity Score (Euclid): 0.277
+***
+Refer: a4_FV1_MP3.mp3
+Input: a4_FV1_MP3.mp3
+Pinyin Prediction: a
+Tone Prediction  : 4
+Similarity Score (Euclid): 1.0
+***
+Refer: a4_FV1_MP3.mp3
+Input: zuo4_FV1_MP3.mp3
+Pinyin Prediction: zuo
+Tone Prediction  : 4
+Similarity Score (Euclid): -0.3312
+***
+Refer: a4_FV1_MP3.mp3
+Input: zuo4_MV2_MP3.mp3
+Pinyin Prediction: zuo
+Tone Prediction  : 4
+Similarity Score (Euclid): -0.1416
+***
+Refer: zuo4_FV1_MP3.mp3
+Input: a1_FV1_MP3.mp3
+Pinyin Prediction: a
+Tone Prediction  : 1
+Similarity Score (Euclid): -0.5362
+***
+Refer: zuo4_FV1_MP3.mp3
+Input: a1_MV3_MP3.mp3
+Pinyin Prediction: a
+Tone Prediction  : 1
+Similarity Score (Euclid): -0.6515
+***
+Refer: zuo4_FV1_MP3.mp3
+Input: a4_FV1_MP3.mp3
+Pinyin Prediction: a
+Tone Prediction  : 4
+Similarity Score (Euclid): -0.3312
+***
+Refer: zuo4_FV1_MP3.mp3
+Input: zuo4_FV1_MP3.mp3
+Pinyin Prediction: zuo
+Tone Prediction  : 4
+Similarity Score (Euclid): 1.0
+***
+Refer: zuo4_FV1_MP3.mp3
+Input: zuo4_MV2_MP3.mp3
+Pinyin Prediction: zuo
+Tone Prediction  : 4
+Similarity Score (Euclid): 0.4417
+***
+Refer: zuo4_MV2_MP3.mp3
+Input: a1_FV1_MP3.mp3
+Pinyin Prediction: a
+Tone Prediction  : 1
+Similarity Score (Euclid): -0.3591
+***
+Refer: zuo4_MV2_MP3.mp3
+Input: a1_MV3_MP3.mp3
+Pinyin Prediction: a
+Tone Prediction  : 1
+Similarity Score (Euclid): -0.4641
+***
+Refer: zuo4_MV2_MP3.mp3
+Input: a4_FV1_MP3.mp3
+Pinyin Prediction: a
+Tone Prediction  : 4
+Similarity Score (Euclid): -0.1416
+***
+Refer: zuo4_MV2_MP3.mp3
+Input: zuo4_FV1_MP3.mp3
+Pinyin Prediction: zuo
+Tone Prediction  : 4
+Similarity Score (Euclid): 0.4418
+***
+Refer: zuo4_MV2_MP3.mp3
+Input: zuo4_MV2_MP3.mp3
+Pinyin Prediction: zuo
+Tone Prediction  : 4
+Similarity Score (Euclid): 1.0
+***

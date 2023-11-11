@@ -82,7 +82,7 @@ class TrainClassify:
             with torch.no_grad():
                 val_loss, val_tone, val_pinyin = self.__runner(self.val, isTrain=False)
 
-            print(f"[+] Epoch: {epoch}")
+            print(f"[+] Epoch: {epoch+1}")
             print(f"Train | Loss: {round(train_loss, 4)}, Tone Acc: {round(train_tone, 4)}, Pinyin Acc: {round(train_pinyin, 4)}")
             print(f"Val   | Loss: {round(val_loss, 4)}, Tone Acc: {round(val_tone, 4)}, Pinyin Acc: {round(val_pinyin, 4)}")
 
@@ -101,9 +101,15 @@ class TrainClassify:
         self.model.eval()
         with torch.no_grad():
             test_loss, test_tone, test_pinyin = self.__runner(self.test, isTrain=False)
-            writer.add_text('Test Loss', str(test_loss))
-            writer.add_text('Test Tone Acc', str(test_tone))
-            writer.add_text('Test Pinyin Acc', str(test_pinyin))
+        
+        print("[+] Testing Phase")
+        print(f"Loss: {test_loss}")
+        print(f"Tone Acc: {test_tone}")
+        print(f"Test Pinyin Acc: {test_pinyin}")
+
+        writer.add_text('Test Loss', str(test_loss))
+        writer.add_text('Test Tone Acc', str(test_tone))
+        writer.add_text('Test Pinyin Acc', str(test_pinyin))
 
 
 if __name__ == "__main__":

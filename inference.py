@@ -7,8 +7,9 @@ import argparse
 def find_dist(ref_embeds, embeds):
     embeds = embeds.squeeze()
     ref_embeds = ref_embeds.squeeze()
-    cos = nn.CosineSimilarity(dim=0)
-    return cos(embeds, ref_embeds)
+    dist = nn.PairwiseDistance(p=2) if args.euclid else nn.CosineSimilarity(dim=0)
+
+    return dist(embeds, ref_embeds)
 
 
 def decode_one_hot(preds, mappings):
@@ -20,8 +21,9 @@ def decode_one_hot(preds, mappings):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("-c", "--config", default="./config.json")
-    parser.add_argument("-r", "--reference")
+    parser.add_argument("--euclid", action="store_true")
     parser.add_argument("-i", "--user_input")
+    parser.add_argument("-r", "--reference")
     args = parser.parse_args()
 
     config = read_json(args.config)
@@ -46,12 +48,13 @@ if __name__ == "__main__":
         pred_embeds, ref_embeds, pinyin_tone = model(user_mp3, ref_mp3)
 
     dist = find_dist(pred_embeds, ref_embeds)
+    
     pinyin_preds, tone_preds = pinyin_tone
-
     tone = decode_one_hot(tone_preds, tones_dict)
     pinyin = decode_one_hot(pinyin_preds, pinyins_dict)
+    dist_type = "(Euclid)" if args.euclid else "(Cosine)"
 
     print("---")
     print(f"Pinyin Prediction: {pinyin}")
     print(f"Tone Prediction  : {tone}")
-    print(f"Similarity Score : {round(dist, 4)}")
+    print(f"Similarity Score {dist_type}: {round(dist, 4)}")
