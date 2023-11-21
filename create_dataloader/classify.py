@@ -13,18 +13,21 @@ class ClassifyDataset(Dataset):
         self.pinyins = read_json(f"{config['csv_folder']}/pinyins.json")
         self.pinyin_tone = read_json(f"{config['csv_folder']}/pinyin_tone.json")
 
-
     def __len__(self):
+        """
+        Returns the number of items in the dataset
+        """
         return len(self.dataset)
 
-
-    def __encode(self, val, mapping):
+    def __encode(self, val: str, mapping: dict) -> list:
+        """
+        Maps the input into a one-hot encoding 
+        """
         one_hot_arr = [0] * len(mapping)
         one_hot_arr[mapping[val]] = 1
         return one_hot_arr
 
-
-    def __getitem__(self, idx: int):
+    def __getitem__(self, idx: int) -> tuple:
         data = self.dataset[idx]
         
         if data[0] not in self.cache:
@@ -38,7 +41,6 @@ class ClassifyDataset(Dataset):
 
         return mfcc, torch.Tensor(pinyin_one_hot), torch.Tensor(tone_one_hot), torch.Tensor(pinyin_tone_one_hot)
 
-
 class ClassifyDataloader():
     def __init__(self, config: dict):
         self.train = ClassifyDataset(config, "cl_train")
@@ -50,7 +52,10 @@ class ClassifyDataloader():
         self.pinyins = read_json(f"{config['csv_folder']}/pinyins.json")
 
 
-    def create(self):
+    def create(self) -> tuple:
+        """
+        Initialises the mappings and the train, test and validation dataloaders
+        """
         train_loader = DataLoader(self.train, batch_size=self.batch_size, shuffle=True)
         val_loader = DataLoader(self.val, batch_size=self.batch_size, shuffle=True)
         test_loader = DataLoader(self.test, batch_size=self.batch_size, shuffle=True)

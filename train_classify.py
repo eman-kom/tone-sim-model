@@ -5,7 +5,6 @@ from torch.utils.tensorboard import SummaryWriter
 from tqdm import tqdm
 from utils import read_json, calculate_accuracy
 import argparse
-import json
 import torch
 
 class TrainClassify:
@@ -28,19 +27,29 @@ class TrainClassify:
         self.scheduler = optim.lr_scheduler.StepLR(self.optimizer, 1, gamma=0.9)
 
 
-    def __criterion(self, tone_out, tone_tgt, pinyin_out, pinyin_tgt):
+    def __criterion(self, tone_out: torch.Tensor, tone_tgt: torch.Tensor, 
+                    pinyin_out: torch.Tensor, pinyin_tgt: torch.Tensor) -> torch.float32:
+        """
+        Finds the loss
+        """
         tone_loss = self.tone_criterion(tone_out, tone_tgt)
         pinyin_loss = self.pinyin_criterion(pinyin_out, pinyin_tgt)
         return tone_loss + pinyin_loss
 
 
-    def __decode_one_hot(self, container, output, mappings_dict):
+    def __decode_one_hot(self, container: list, output: torch.Tensor, mappings_dict: dict) -> None:
+        """
+        Finds the most likely mapping from prediction array
+        """
         _, max_idxs = torch.max(output.data, 1)
         max_idxs = max_idxs.detach().cpu().numpy().tolist()
         container.extend([mappings_dict[idx] for idx in max_idxs])
 
 
-    def __runner(self, dataset, isTrain=True):
+    def __runner(self, dataset, isTrain=True) -> tuple:
+        """
+        Passes the dataset through the model
+        """
         epoch_loss = 0
         y_true_tone, y_pred_tone = [], []
         y_true_pinyin, y_pred_pinyin = [], []
@@ -71,7 +80,10 @@ class TrainClassify:
         return epoch_loss, tone_acc, pinyin_acc
 
 
-    def run(self):
+    def run(self) -> None:
+        """
+        Entrypoint to train the model
+        """
         min_val_loss = float('inf')
 
         for epoch in range(self.epochs):
@@ -94,6 +106,7 @@ class TrainClassify:
             writer.add_scalar("Tone_Acc/validation", val_tone, epoch)
             writer.add_scalar("Pinyin_Acc/validation", val_pinyin, epoch)
 
+            # Uses the minimum val loss as best model criterion
             if val_loss < min_val_loss:
                 torch.save(self.model.state_dict(), f'{self.models_folder}/{self.name}')
                 min_val_loss = val_loss

@@ -4,6 +4,9 @@ from create_datasets.change import CreateChangeDataset
 from create_datasets.classify import CreateClassifyDataset
  
 if __name__ == "__main__":
+    """
+    Runner to initialise datasets from root directory
+    """
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", default="./config.json")
     args = parser.parse_args()

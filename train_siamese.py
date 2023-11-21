@@ -5,7 +5,6 @@ from torch.utils.tensorboard import SummaryWriter
 from tqdm import tqdm
 from utils import read_json, calculate_accuracy, dist_filename
 import argparse
-import json
 import torch
 import numpy as np
 
@@ -32,24 +31,36 @@ class TrainSiamese:
 
         self.euclid_dist = nn.PairwiseDistance(p=2)
 
-    def __euclid_loss_fn(self, embeddings, ref_embeddings, similarity, margin=1.0):
+    def __euclid_loss_fn(self, embeddings: torch.Tensor, ref_embeddings: torch.Tensor, similarity: torch.Tensor, margin=1.0) -> torch.Tensor:
+        """
+        Euclidean Distance Loss Function defined here
+        """
         dist = self.__calc_dist(embeddings, ref_embeddings)
         loss = similarity * torch.pow(dist, 2) + (1 - similarity) * torch.pow(torch.clamp(margin - dist, min=0.0), 2)
         return torch.mean(loss)
 
-    def __loss_fn(self, embeddings, ref_embeddings, similarity, margin=1.0):
+    def __loss_fn(self, embeddings: torch.Tensor, ref_embeddings: torch.Tensor, similarity: torch.Tensor, margin=1.0) -> torch.Tensor:
+        """
+        Uses the appropriate loss function
+        """
         if args.euclid:
             return self.__euclid_loss_fn(embeddings, ref_embeddings, similarity, margin)
         else:
             return self.cos_loss_fn(embeddings, ref_embeddings, similarity)
 
-    def __calc_dist(self, embeddings, ref_embeddings):
+    def __calc_dist(self, embeddings: torch.Tensor, ref_embeddings: torch.Tensor) -> torch.Tensor:
+        """
+        Finds the distance between 2 sets of embeddings
+        """
         if args.euclid:
             return self.euclid_dist(embeddings, ref_embeddings)
         else:
             return self.cos_dist(embeddings, ref_embeddings)
 
-    def __runner(self, dataset, isTrain=True):
+    def __runner(self, dataset, isTrain=True) -> tuple:
+        """
+        Passes the dataset through the model
+        """
         epoch_loss = 0
         y_true_similarity, y_pred_similarity = [], []
 
@@ -58,6 +69,7 @@ class TrainSiamese:
             user_input = user_input.to(self.device)
             similarity = similarity.to(self.device)
 
+            # Euclidean distance requires dissimilar data to be 0
             if args.euclid:
                 similarity[similarity == -1] = 0
 
@@ -73,6 +85,7 @@ class TrainSiamese:
             y_true_similarity.extend(similarity)
             preds_sims = self.__calc_dist(pred_embeds, ref_embeds).detach().cpu().numpy()
             
+            # Pushes the similarity to its max values to test accuracy
             if args.euclid:
                 preds_sims = 1 - np.trunc(preds_sims)
             else:
@@ -87,7 +100,10 @@ class TrainSiamese:
         return epoch_loss, accuracy
 
 
-    def run(self):
+    def run(self) -> None:
+        """
+        Entrypoint to train the model
+        """
         min_val_loss = float('inf')
         dist_type = "(Euclid)" if args.euclid else "(Cosine)"
 
@@ -109,6 +125,7 @@ class TrainSiamese:
             writer.add_scalar("Similarity_Acc/train", train_acc, epoch)
             writer.add_scalar("Similarity_Acc/validation", val_acc, epoch)
 
+            # Uses the minimum val loss as best model criterion
             if val_loss < min_val_loss:
                 torch.save(self.model.state_dict(), f'{self.models_folder}/{self.name}')
                 min_val_loss = val_loss

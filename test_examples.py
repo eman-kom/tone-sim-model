@@ -5,13 +5,19 @@ import torch
 import argparse
 import glob
 
-def decode_one_hot(preds, mappings):
+def decode_one_hot(preds: torch.Tensor, mappings: dict) -> str:
+    """
+    Finds decoded mapping of the most likely index from the prediction array
+    """
     preds = preds.squeeze()
     _, idx = torch.max(preds, 0)
     return mappings[int(idx)]
 
 
 if __name__ == "__main__":
+    """
+    Uses the examples folder as a demo for the completed system
+    """
     parser = argparse.ArgumentParser()
     parser.add_argument("-c", "--config", default="./config.json")
     parser.add_argument("-f", "--folder", default="./examples")
@@ -64,6 +70,8 @@ if __name__ == "__main__":
             pred_embeds = pred_embeds.squeeze()
             sim = sim_func(pred_embeds, ref_embeds).item()
 
+            # Euclidean distance for similar output returns 0. Hence, need to 
+            # find its complement to get the similarity score.
             if args.euclid:
                 sim = 1 - sim
 

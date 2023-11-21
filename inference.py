@@ -4,7 +4,10 @@ from torch import nn
 import torch
 import argparse
 
-def find_dist(ref_embeds, embeds):
+def find_dist(ref_embeds: torch.Tensor, embeds: torch.Tensor) -> torch.Tensor:
+    """
+    Runs the distance function on the 2 embeddings
+    """
     embeds = embeds.squeeze()
     ref_embeds = ref_embeds.squeeze()
     dist = nn.PairwiseDistance(p=2) if args.euclid else nn.CosineSimilarity(dim=0)
@@ -12,7 +15,10 @@ def find_dist(ref_embeds, embeds):
     return dist(embeds, ref_embeds)
 
 
-def decode_one_hot(preds, mappings):
+def decode_one_hot(preds: torch.Tensor, mappings: dict) -> str:
+    """
+    Finds decoded mapping of the most likely index from the prediction array
+    """
     preds = preds.squeeze()
     _, idx = torch.max(preds, 0)
     return mappings[int(idx)]
@@ -26,16 +32,19 @@ if __name__ == "__main__":
     parser.add_argument("-r", "--reference")
     args = parser.parse_args()
 
+    # initialise inputs
     config = read_json(args.config)
     ref_mp3 = process_mp3(args.reference)
     ref_mp3 = ref_mp3.unsqueeze(0)
     user_mp3 = process_mp3(args.user_input)
     user_mp3 = user_mp3.unsqueeze(0)
 
+    # intialise one-hot decoders
     swap_key_values = lambda mappings: dict(zip(mappings.values(), mappings.keys()))
     pinyins_dict = swap_key_values(read_json(f"{config['csv_folder']}/pinyins.json"))
     tones_dict = swap_key_values(read_json(f"{config['csv_folder']}/tones.json"))
 
+    # initialise relevant models
     model_name = dist_filename(config['siamese_model_name'], args.euclid)
     siamese_model = f"{config['models_folder']}/{model_name}"
     pretrained_model = f"{config['models_folder']}/{config['pretrained_model_name']}"
@@ -50,6 +59,8 @@ if __name__ == "__main__":
 
     dist = find_dist(pred_embeds, ref_embeds).item()
     
+    # Euclidean distance for similar output returns 0. Hence, need to 
+    # find its complement to get the similarity score.
     if args.euclid:
         dist = 1 - dist
     

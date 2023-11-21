@@ -11,11 +11,18 @@ class CreateChangeDataset:
         self.val_split = config['val_split']
         self.train_split = config['train_split']
 
-    def __extract_pinyin_tone(self, filename: str):
+    def __extract_pinyin_tone(self, filename: str) -> str:
+        """
+        Extracts the pinyin from the filename. (e.g. a1_FV1_MP3.mp3 -> a1)
+        """
         pinyin_tone, _, _ = filename.split("_")
         return pinyin_tone
 
     def __combine_same_tones(self, filepaths: list, curr_tone: str) -> list:
+        """
+        Given a set of similar pinyin and tone filepaths, create combinations to
+        categorise these combinations as correct tones. 
+        """
         same_tones = []
         combinations = []
         pair_tones = lambda x: [[ground_truth, changed, 1] for ground_truth, changed in itertools.combinations(x, 2)]
@@ -34,6 +41,10 @@ class CreateChangeDataset:
         return combinations
     
     def __generate_mismatches(self, combinations: list) -> list:
+        """
+        Generate false pairings by randomly selecting different pinyin/tone for each
+        entry in the dataset.
+        """
         mismatch_count = len(combinations)
         mismatches = []
 
@@ -51,7 +62,10 @@ class CreateChangeDataset:
 
         return mismatches
 
-    def create(self, init_tone="a1"):
+    def create(self, init_tone="a1") -> list:
+        """
+        Entrypoint to create the dataset.
+        """
         all_mp3s = glob.glob(f"{self.mp3_folder}/*.mp3")
         filepaths =  [filepath.replace("\\", "/").split("/")[-1] for filepath in all_mp3s]
         filepaths.sort()
@@ -62,7 +76,10 @@ class CreateChangeDataset:
 
         return all_combinations
 
-    def save(self):
+    def save(self) -> None:
+        """
+        Saves and splits the dataset into its train, test and val datasets
+        """
         dataset = self.create()
         train, val, test = dataset_split(dataset, self.train_split, self.val_split)
         fields = ["reference", "user_input", "similarity"]

@@ -5,7 +5,7 @@
 	"pretrained_model_name": "best_multitask_model.pth",
 	"siamese_model_name": "best_siamese_model.pth",
 	"train_split": 0.6,
-	"val_split": 0.2,
+	"val_split": 0.3,
 	"sampling_rate": 44100,
 	"batch_size": 32,
 	"epochs": 15,

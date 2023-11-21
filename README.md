@@ -1,6 +1,14 @@
-
 # Tone Sim Model
 Predicts the pinyin and tone of a student and calculates its similarity with a reference audio.
+
+Please change the settings in `config.json` to accomodate to your system. Especially the filepaths. Recommended to use absoute filepaths.
+
+## Setting up the environment
+```
+conda create -n ToneSimModel
+conda activate ToneSimModel
+pip install -r requirements.txt
+```
 
 ## Training
 To initialise the dataset: `python initialise_dataset.py` 

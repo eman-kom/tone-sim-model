@@ -11,12 +11,18 @@ class CreateClassifyDataset:
         self.train_split = config['train_split']
 
 
-    def __add_to_dict(self, val, mappings):
+    def __add_to_dict(self, val: str, mappings: dict) -> None:
+        """
+        Adds a mapping to a dictionary
+        """
         if val not in mappings:
             mappings[val] = len(mappings)
 
 
-    def create(self):
+    def create(self) -> tuple:
+        """
+        Entrypoint to create the datasets and mappings
+        """
         all_mp3s = glob.glob(f"{self.mp3_folder}/*.mp3")
         filepaths =  [filepath.replace("\\", "/").split("/")[-1] for filepath in all_mp3s]
         filepaths.sort()
@@ -41,14 +47,20 @@ class CreateClassifyDataset:
         return dataset, mappings_dict
 
 
-    def __save_dict(self, filename: str, mappings: dict):
+    def __save_dict(self, filename: str, mappings: dict) -> None:
+        """
+        Saves mappings as json
+        """
         with open(f"{self.csv_folder}/{filename}.json", "w") as f:
             json.dump(mappings, f, indent=4)
 
         print(f"[*] File Created: {self.csv_folder}/{filename}.json")
 
 
-    def save(self):
+    def save(self) -> None:
+        """
+        Saves and splits dataset into its train, test and val
+        """
         dataset, mappings_dict = self.create()
 
         self.__save_dict("tones", mappings_dict["tone_mappings"])
