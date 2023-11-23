@@ -1,7 +1,7 @@
 # Tone Sim Model
 Predicts the pinyin and tone of a student and calculates its similarity with a reference audio.
 
-Please change the settings in `config.json` to accomodate to your system. Especially the filepaths. Recommended to use absoute filepaths.
+Please change the settings in `config.json` to accomodate to your system. Especially the filepaths. Recommended to use absolute filepaths.
 
 ## Setting up the environment
 ```
